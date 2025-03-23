@@ -131,38 +131,6 @@ function* _initializeWebSocketsChannel() {
 
 const delay = ms => new Promise(resolve => setTimeout(() => resolve('timed out'), ms));
 
-function* GetMe() {
-	while(true) {
-		let { inputVariables, params, history } = yield take(actions.GetMe);
-		
-		// Write page parameters to temporary state for standard access.
-		let state = yield select();
-		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
-		
-		let payload;
-		
-		try {
-			
-			
-			
-			
-var HttpSuccessCode3Variable = 200
-
-			
-			
-			
-
-const response1110371 = yield call(serverApi.GetMeEndpoint, null);
-const GetMeEndpointResponseAsVariable = response1110371.data;
-const GetMeEndpointResponseCodeAsVariable = response1110371.status;
-if (HttpSuccessCode3Variable == GetMeEndpointResponseCodeAsVariable) {
-yield put(actions.changeInput('BasicAuthLogin', GetMeEndpointResponseAsVariable));
-}
-		} catch(error) {
-            console.warn(error)
-		}
-	}
-}
 function* Logout() {
 	while(true) {
 		let { inputVariables, params, history } = yield take(actions.Logout);
@@ -189,6 +157,38 @@ const response1110365 = yield call(serverApi.LogoutEndpoint, null);
 const LogoutEndpointResponseCodeAsVariable = response1110365.status;
 if (HttpSuccessCode0Variable == LogoutEndpointResponseCodeAsVariable) {
 
+}
+		} catch(error) {
+            console.warn(error)
+		}
+	}
+}
+function* GetMe() {
+	while(true) {
+		let { inputVariables, params, history } = yield take(actions.GetMe);
+		
+		// Write page parameters to temporary state for standard access.
+		let state = yield select();
+		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
+		
+		let payload;
+		
+		try {
+			
+			
+			
+			
+var HttpSuccessCode3Variable = 200
+
+			
+			
+			
+
+const response1110371 = yield call(serverApi.GetMeEndpoint, null);
+const GetMeEndpointResponseAsVariable = response1110371.data;
+const GetMeEndpointResponseCodeAsVariable = response1110371.status;
+if (HttpSuccessCode3Variable == GetMeEndpointResponseCodeAsVariable) {
+yield put(actions.changeInput('BasicAuthLogin', GetMeEndpointResponseAsVariable));
 }
 		} catch(error) {
             console.warn(error)
@@ -223,42 +223,6 @@ const response1110367 = yield call(serverApi.RequestPasswordResetEndpoint, paylo
 
 const RequestPasswordResetEndpointResponseCodeAsVariable = response1110367.status;
 if (HttpSuccessCodeVariable == RequestPasswordResetEndpointResponseCodeAsVariable) {
-
-}
-		} catch(error) {
-            console.warn(error)
-		}
-	}
-}
-function* SignUp() {
-	while(true) {
-		let { inputVariables, params, history } = yield take(actions.SignUp);
-		
-		// Write page parameters to temporary state for standard access.
-		let state = yield select();
-		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
-		
-		let payload;
-		
-		try {
-			
-			
-			
-			
-var HttpSuccessCode2Variable = 200
-
-			
-			
-			
-payload = {};
-
-payload['body_variables'] = {};
-payload.body_variables['Username'] = state.reducer?.['FormSignUpEndpoint']?.['Username'];
-payload.body_variables['Password'] = state.reducer?.['FormSignUpEndpoint']?.['Password'];
-const response1110374 = yield call(serverApi.SignUpEndpoint, payload);
-
-const SignUpEndpointResponseCodeAsVariable = response1110374.status;
-if (HttpSuccessCode2Variable == SignUpEndpointResponseCodeAsVariable) {
 
 }
 		} catch(error) {
@@ -302,6 +266,42 @@ if (HttpSuccessCode1Variable == LoginEndpointResponseCodeAsVariable) {
 		}
 	}
 }
+function* SignUp() {
+	while(true) {
+		let { inputVariables, params, history } = yield take(actions.SignUp);
+		
+		// Write page parameters to temporary state for standard access.
+		let state = yield select();
+		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
+		
+		let payload;
+		
+		try {
+			
+			
+			
+			
+var HttpSuccessCode2Variable = 200
+
+			
+			
+			
+payload = {};
+
+payload['body_variables'] = {};
+payload.body_variables['Username'] = state.reducer?.['FormSignUpEndpoint']?.['Username'];
+payload.body_variables['Password'] = state.reducer?.['FormSignUpEndpoint']?.['Password'];
+const response1110374 = yield call(serverApi.SignUpEndpoint, payload);
+
+const SignUpEndpointResponseCodeAsVariable = response1110374.status;
+if (HttpSuccessCode2Variable == SignUpEndpointResponseCodeAsVariable) {
+
+}
+		} catch(error) {
+            console.warn(error)
+		}
+	}
+}
 function* on_app_started() {
 	while(true) {
 		let { inputVariables, params, history } = yield take(actions.on_app_started);
@@ -325,10 +325,10 @@ function* on_app_started() {
 export default function* saga() {
 	yield fork(log_event);
 	yield fork(_initializeWebSocketsChannel);
-	yield fork(GetMe);
 	yield fork(Logout);
+	yield fork(GetMe);
 	yield fork(RequestPasswordReset);
-	yield fork(SignUp);
 	yield fork(Login);
+	yield fork(SignUp);
 	yield fork(on_app_started);
 }
