@@ -131,6 +131,38 @@ function* _initializeWebSocketsChannel() {
 
 const delay = ms => new Promise(resolve => setTimeout(() => resolve('timed out'), ms));
 
+function* GetMe() {
+	while(true) {
+		let { inputVariables, params, history } = yield take(actions.GetMe);
+		
+		// Write page parameters to temporary state for standard access.
+		let state = yield select();
+		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
+		
+		let payload;
+		
+		try {
+			
+			
+			
+			
+var HttpSuccessCode3Variable = 200
+
+			
+			
+			
+
+const response1110371 = yield call(serverApi.GetMeEndpoint, null);
+const GetMeEndpointResponseAsVariable = response1110371.data;
+const GetMeEndpointResponseCodeAsVariable = response1110371.status;
+if (HttpSuccessCode3Variable == GetMeEndpointResponseCodeAsVariable) {
+yield put(actions.changeInput('BasicAuthLogin', GetMeEndpointResponseAsVariable));
+}
+		} catch(error) {
+            console.warn(error)
+		}
+	}
+}
 function* Logout() {
 	while(true) {
 		let { inputVariables, params, history } = yield take(actions.Logout);
@@ -192,38 +224,6 @@ const response1110367 = yield call(serverApi.RequestPasswordResetEndpoint, paylo
 const RequestPasswordResetEndpointResponseCodeAsVariable = response1110367.status;
 if (HttpSuccessCodeVariable == RequestPasswordResetEndpointResponseCodeAsVariable) {
 
-}
-		} catch(error) {
-            console.warn(error)
-		}
-	}
-}
-function* GetMe() {
-	while(true) {
-		let { inputVariables, params, history } = yield take(actions.GetMe);
-		
-		// Write page parameters to temporary state for standard access.
-		let state = yield select();
-		params && Object.keys(params).forEach((k) => state.reducer[k] = params[k]);
-		
-		let payload;
-		
-		try {
-			
-			
-			
-			
-var HttpSuccessCode3Variable = 200
-
-			
-			
-			
-
-const response1110371 = yield call(serverApi.GetMeEndpoint, null);
-const GetMeEndpointResponseAsVariable = response1110371.data;
-const GetMeEndpointResponseCodeAsVariable = response1110371.status;
-if (HttpSuccessCode3Variable == GetMeEndpointResponseCodeAsVariable) {
-yield put(actions.changeInput('BasicAuthLogin', GetMeEndpointResponseAsVariable));
 }
 		} catch(error) {
             console.warn(error)
@@ -325,9 +325,9 @@ function* on_app_started() {
 export default function* saga() {
 	yield fork(log_event);
 	yield fork(_initializeWebSocketsChannel);
+	yield fork(GetMe);
 	yield fork(Logout);
 	yield fork(RequestPasswordReset);
-	yield fork(GetMe);
 	yield fork(SignUp);
 	yield fork(Login);
 	yield fork(on_app_started);

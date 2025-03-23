@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://app5621.prod.dittofi.link/style.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
 
-        <link rel="stylesheet" type="text/css" href="/style.css?uuid=10d1eb95-4916-4202-96f2-7df04ddf6fc7"></link>
+        <link rel="stylesheet" type="text/css" href="/style.css?uuid=1c95574d-f680-4945-a650-2425b9cd1965"></link>
       </head>
       <body>
         <div id="root">
